@@ -18,6 +18,8 @@ public class Car : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
     }
 
    
@@ -30,6 +32,9 @@ public class Car : MonoBehaviour
          * The Vertical Axis should make the player move forwards and backwards
          * The Horizontal Axis should make the player rotate on the Vector3.back axis
          */
-
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.up * Time.deltaTime * moveSpeed * verticalInput);
+        transform.Rotate(Vector3.back * Time.deltaTime * turnSpeed * horizontalInput);
     }
 }

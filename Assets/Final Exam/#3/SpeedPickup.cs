@@ -15,10 +15,35 @@ using UnityEngine;
  *      - Change the speed back to the originalSpeed
  * 
  */
-public class SpeedPickup : MonoBehaviour
+public class SpeedPickup : PickUp
 {
-    public float originalSpeed;
-    public float boostedSpeed;
+    public float originalSpeed = 3f;
 
+    public float boostedSpeed = 20f;
 
+    public Rigidbody2D rb;
+
+    public SpriteRenderer sr;
+
+    public void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+    public override void Activate()
+    {
+        MakeThisPickupInvisible();
+
+    }
+
+    private IEnumerator Speeeed()
+    {
+        originalSpeed = boostedSpeed;
+
+        yield return new WaitForSeconds(2);
+        
+        DelayedDestroy();
+    }
 }
